@@ -1,0 +1,65 @@
+import { Message } from 'node-telegram-bot-api';
+import bot from '../../../config/bot';
+import Movie, { IMovie } from '../../../model/Movie';
+import { empty_menu } from '../../../utils/tg_menu/empty_menu';
+import { WEBSITE_URL } from '../../../config/env';
+import { check_member_middleware } from '../../../middleware/check_member_middleware';
+
+
+const tg_channels_must_member = [
+  {
+    name: 'ANIHUB',
+    chatId: -1002478699595,
+    link: 'https://t.me/Anihub_Rasmiy',
+  },
+  {
+    name: 'Tarjima Animelar',
+    chatId: -1002382338695,
+    link: 'https://t.me/tarjima_animelar_123',
+  },
+  {
+    name: 'Tarjima Filmlar',
+    chatId: -1002462536703,
+    link: 'https://t.me/tarjima_filmlar_12',
+  },
+  {
+    name: 'Tarjima Multfilmlar',
+    chatId: -1002364151215,
+    link: 'https://t.me/tarjima_multfilmlar_12',
+  },
+];
+
+
+export const get_content = async (msg: Message) => {
+  const userId = msg.from?.id;
+
+  if (!userId) return true;
+  if (!msg.text) return;
+
+  const [bot_command, content_id] = msg.text.split(' ');
+
+  if (bot_command === '/start' && content_id) {
+
+    if (await check_member_middleware(msg)) return true;
+
+
+    const movie: IMovie | null = await Movie.findById(content_id);
+
+    if (!movie) {
+      await bot.sendMessage(userId, '🚫 Topilmadi!', empty_menu);
+      return true;
+    }
+
+    await bot.copyMessage(userId, movie.fromChatId, movie.message_id, {
+      reply_markup: {
+        inline_keyboard: [
+          [{
+            text: '🌏 Saytimizga tashrif buyuring',
+            url: WEBSITE_URL,
+          }],
+        ],
+      },
+    });
+    return true;
+  }
+};
