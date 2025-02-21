@@ -15,3 +15,5 @@ export const tg_channels = {
     value: 'cartoon',
   },
 } as const;
+
+export const split_symbol = '@(=_=)@';

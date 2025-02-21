@@ -1,10 +1,10 @@
 import { Message } from 'node-telegram-bot-api';
 import User, { IUser } from '../../../../model/User';
-import { actions, actions_text } from '../../../../utils/actions';
+import { actions } from '../../../../utils/actions';
 import bot from '../../../../config/bot';
 import { back_main_menu } from '../../../../utils/tg_menu';
 import Movie, { IMovie } from '../../../../model/Movie';
-import { tg_channels } from '../../../../utils/constants';
+import { channels_menu } from '../../../../utils/tg_menu/channels_menu';
 
 export const confirm_video_action = async (msg: Message, user: IUser) => {
   const [action_value, image_id, video_id] = user.action.split('@(=_=)@');
@@ -38,17 +38,7 @@ export const confirm_video_action = async (msg: Message, user: IUser) => {
 
     await User.findByIdAndUpdate(user._id, { action: actions.choice_channel + '@(=_=)@' + image_id + '@(=_=)@' + new_movie_data._id.toString() });
 
-    await bot.sendMessage(user.userId, 'Yaratilgan kontent qaysi kanalga yuborilsin?', {
-      reply_markup: {
-        resize_keyboard: true,
-        keyboard: [
-          [{ text: tg_channels.anime.name }],
-          [{ text: tg_channels.film.name }],
-          [{ text: tg_channels.cartoon.name }],
-          [{ text: actions_text.main_menu }],
-        ],
-      },
-    });
+    await bot.sendMessage(user.userId, '👥 Yaratilgan kontent qaysi kanalga yuborilsin?', channels_menu);
 
     return true;
   }
