@@ -15,6 +15,7 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         default: '',
     },
+    token: String,
     status: {
         type: String,
         enum: [exports.userStatus.USER, exports.userStatus.ADMIN],

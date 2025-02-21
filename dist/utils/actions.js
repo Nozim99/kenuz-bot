@@ -14,10 +14,13 @@ exports.actions = {
     get_series_videos: 'get_series_videos',
     get_series_description: 'get_series_description',
     choice_channel_for_series: 'choice_channel_for_series',
+    login: 'login',
+    login_password: 'login_password',
 };
 exports.actions_text = {
     main_menu: '🏠 Bosh sahifa',
     create_content: '🎬 Film yaratish',
     create_series: '🎞 Serial yaratish',
     write_description: '✍️ Description yozish',
+    login: '👤 Kirish',
 };

@@ -30,7 +30,6 @@ const request_series_description_action = async (msg, user) => {
             ...tg_menu_1.back_main_menu,
             parse_mode: 'HTML',
         });
-        await bot_1.default.sendMessage(user.userId, 'Sizning id raqamingiz: 123', tg_menu_1.back_main_menu);
         return true;
     }
 };

@@ -24,10 +24,11 @@ const send_series_content_to_channel = async (msg, user) => {
             await bot_1.default.sendMessage(user.userId, '❗️ Menyudan kerakli kanalni tanlang');
             return true;
         }
+        await bot_1.default.sendMessage(user.userId, '📥 Yuklanish boshlandi. ⏳ Biroz kuting');
         for (const videoId of video_id_list) {
             const saved_movie = await Movie_1.default.findById(videoId);
             if (saved_movie) {
-                await bot_1.default.sendPhoto(current_channel.id, image_id, {
+                const response = await bot_1.default.sendPhoto(current_channel.id, image_id, {
                     caption: saved_movie.description,
                     reply_markup: {
                         inline_keyboard: [
@@ -43,6 +44,26 @@ const send_series_content_to_channel = async (msg, user) => {
                     },
                 });
                 await Movie_1.default.findByIdAndUpdate(saved_movie._id, { $unset: { description: '' } });
+                if (user.token && response.sender_chat) {
+                    try {
+                        const video_url = 'https://t.me/' + response.sender_chat.username + '/' + response.message_id;
+                        const series_title = saved_movie.description?.split('🎬 Nomi: ')?.[1]?.split(' | ')?.[0];
+                        const episode_number = saved_movie.description?.split('-qism\n')?.[0]?.split(' | ')?.at(-1);
+                        if (series_title && episode_number) {
+                            await fetch(env_1.API_URL + '/api/episode/create', {
+                                method: 'POST',
+                                body: JSON.stringify({ video_url, series_title, episode_number }),
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Cookie': `token=${user.token}; Path=/`,
+                                },
+                            });
+                        }
+                    }
+                    catch (error) {
+                        await bot_1.default.sendMessage(user.userId, '🚫 WEB_API\'da hatolik yuz berdi❗️');
+                    }
+                }
             }
         }
         await User_1.default.findByIdAndUpdate(user._id, { action: actions_1.actions.main_menu });

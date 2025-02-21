@@ -8,6 +8,7 @@ exports.main_menu = {
         keyboard: [
             [{ text: actions_1.actions_text.create_content }],
             [{ text: actions_1.actions_text.create_series }],
+            [{ text: actions_1.actions_text.login }],
         ],
     },
 };
