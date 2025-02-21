@@ -34,6 +34,7 @@ const get_content = async (msg) => {
                             }],
                     ],
                 },
+                protect_content: true,
             });
         }
         catch (error) {

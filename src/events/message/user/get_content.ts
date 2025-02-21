@@ -36,6 +36,7 @@ export const get_content = async (msg: Message) => {
             }],
           ],
         },
+        protect_content: true,
       });
     } catch (error) {
       await bot.sendMessage(userId, '❗️ Topilmadi');
