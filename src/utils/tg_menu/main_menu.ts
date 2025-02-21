@@ -6,6 +6,7 @@ export const main_menu = {
     keyboard: [
       [{ text: actions_text.create_content }],
       [{ text: actions_text.create_series }],
+      [{ text: actions_text.login }],
     ],
   },
 };

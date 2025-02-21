@@ -11,6 +11,8 @@ export const actions = {
   get_series_videos: 'get_series_videos',
   get_series_description: 'get_series_description',
   choice_channel_for_series: 'choice_channel_for_series',
+  login: 'login',
+  login_password: 'login_password',
 } as const;
 
 export const actions_text = {
@@ -18,4 +20,5 @@ export const actions_text = {
   create_content: '🎬 Film yaratish',
   create_series: '🎞 Serial yaratish',
   write_description: '✍️ Description yozish',
+  login: '👤 Kirish',
 } as const;

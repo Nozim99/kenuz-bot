@@ -34,12 +34,6 @@ export const request_series_description_action = async (msg: Message, user: IUse
       },
     );
 
-    await bot.sendMessage(
-      user.userId,
-      'Sizning id raqamingiz: 123',
-      back_main_menu,
-    );
-
     return true;
   }
 };

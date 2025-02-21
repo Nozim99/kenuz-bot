@@ -47,7 +47,6 @@ export const send_content_to_channel = async (msg: Message, user: IUser) => {
       },
     });
 
-
     await Movie.findByIdAndUpdate(movie._id, { $unset: { description: '' } });
     await User.findByIdAndUpdate(user._id, { action: actions.main_menu });
     await bot.sendMessage(user.userId, '✅ Tayyor bo\'ldi', main_menu);

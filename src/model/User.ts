@@ -4,6 +4,7 @@ export interface IUser extends Schema {
   userId: number;
   action: string;
   status: 'user' | 'admin';
+  token?: string;
   _id: Schema.Types.ObjectId;
 }
 
@@ -21,6 +22,7 @@ const UserSchema = new Schema<IUser>({
     type: String,
     default: '',
   },
+  token: String,
   status: {
     type: String,
     enum: [userStatus.USER, userStatus.ADMIN],

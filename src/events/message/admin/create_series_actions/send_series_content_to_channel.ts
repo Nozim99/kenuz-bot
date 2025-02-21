@@ -4,7 +4,7 @@ import { split_symbol, tg_channels } from '../../../../utils/constants';
 import { actions, actions_text } from '../../../../utils/actions';
 import Movie, { IMovie } from '../../../../model/Movie';
 import bot from '../../../../config/bot';
-import { WEBSITE_URL } from '../../../../config/env';
+import { API_URL, WEBSITE_URL } from '../../../../config/env';
 import { main_menu } from '../../../../utils/tg_menu';
 
 export const send_series_content_to_channel = async (msg: Message, user: IUser) => {
@@ -24,12 +24,12 @@ export const send_series_content_to_channel = async (msg: Message, user: IUser) 
       return true;
     }
 
-
+    await bot.sendMessage(user.userId, '📥 Yuklanish boshlandi. ⏳ Biroz kuting');
     for (const videoId of video_id_list) {
       const saved_movie: IMovie | null = await Movie.findById(videoId);
 
       if (saved_movie) {
-        await bot.sendPhoto(current_channel.id, image_id, {
+        const response = await bot.sendPhoto(current_channel.id, image_id, {
           caption: saved_movie.description,
           reply_markup: {
             inline_keyboard: [
@@ -47,6 +47,27 @@ export const send_series_content_to_channel = async (msg: Message, user: IUser) 
 
 
         await Movie.findByIdAndUpdate(saved_movie._id, { $unset: { description: '' } });
+
+        if (user.token && response.sender_chat) {
+          try {
+            const video_url = 'https://t.me/' + response.sender_chat.username + '/' + response.message_id;
+            const series_title = saved_movie.description?.split('🎬 Nomi: ')?.[1]?.split(' | ')?.[0];
+            const episode_number = saved_movie.description?.split('-qism\n')?.[0]?.split(' | ')?.at(-1);
+
+            if (series_title && episode_number) {
+              await fetch(API_URL + '/api/episode/create', {
+                method: 'POST',
+                body: JSON.stringify({ video_url, series_title, episode_number }),
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Cookie': `token=${user.token}; Path=/`,
+                },
+              });
+            }
+          } catch (error) {
+            await bot.sendMessage(user.userId, '🚫 WEB_API\'da hatolik yuz berdi❗️');
+          }
+        }
       }
     }
 
