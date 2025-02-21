@@ -9,7 +9,7 @@ const actions_1 = require("../../../../utils/actions");
 const bot_1 = __importDefault(require("../../../../config/bot"));
 const tg_menu_1 = require("../../../../utils/tg_menu");
 const Movie_1 = __importDefault(require("../../../../model/Movie"));
-const constants_1 = require("../../../../utils/constants");
+const channels_menu_1 = require("../../../../utils/tg_menu/channels_menu");
 const confirm_video_action = async (msg, user) => {
     const [action_value, image_id, video_id] = user.action.split('@(=_=)@');
     if (action_value === actions_1.actions.get_description && image_id && video_id) {
@@ -32,17 +32,7 @@ const confirm_video_action = async (msg, user) => {
         });
         const new_movie_data = await new_movie.save();
         await User_1.default.findByIdAndUpdate(user._id, { action: actions_1.actions.choice_channel + '@(=_=)@' + image_id + '@(=_=)@' + new_movie_data._id.toString() });
-        await bot_1.default.sendMessage(user.userId, 'Yaratilgan kontent qaysi kanalga yuborilsin?', {
-            reply_markup: {
-                resize_keyboard: true,
-                keyboard: [
-                    [{ text: constants_1.tg_channels.anime.name }],
-                    [{ text: constants_1.tg_channels.film.name }],
-                    [{ text: constants_1.tg_channels.cartoon.name }],
-                    [{ text: actions_1.actions_text.main_menu }],
-                ],
-            },
-        });
+        await bot_1.default.sendMessage(user.userId, '👥 Yaratilgan kontent qaysi kanalga yuborilsin?', channels_menu_1.channels_menu);
         return true;
     }
 };

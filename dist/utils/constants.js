@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tg_channels = void 0;
+exports.split_symbol = exports.tg_channels = void 0;
 exports.tg_channels = {
     anime: {
         name: 'Tarjima Animelar',
@@ -18,3 +18,4 @@ exports.tg_channels = {
         value: 'cartoon',
     },
 };
+exports.split_symbol = '@(=_=)@';
