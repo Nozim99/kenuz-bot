@@ -37,6 +37,9 @@ const get_series_description_action = async (msg, user) => {
                 const new_movie_data = await new_movie.save();
                 movie_schema_id_list.push(new_movie_data._id.toString());
             }
+            if (video_id_list.length > 30) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
         }
         if (!movie_schema_id_list.length) {
             await User_1.default.findByIdAndUpdate(user._id, { action: actions_1.actions.main_menu });

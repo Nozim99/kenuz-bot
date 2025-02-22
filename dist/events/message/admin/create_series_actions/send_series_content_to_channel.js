@@ -65,6 +65,9 @@ const send_series_content_to_channel = async (msg, user) => {
                     }
                 }
             }
+            if (video_id_list.length > 20) {
+                await new Promise(resolve => setTimeout(resolve, 3000));
+            }
         }
         await User_1.default.findByIdAndUpdate(user._id, { action: actions_1.actions.main_menu });
         await bot_1.default.sendMessage(user.userId, '✅ Tayyor bo\'ldi', tg_menu_1.main_menu);
