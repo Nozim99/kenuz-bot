@@ -7,6 +7,7 @@ import bot from '../../../../config/bot';
 import { API_URL, WEBSITE_URL } from '../../../../config/env';
 import { main_menu } from '../../../../utils/tg_menu';
 
+
 export const send_series_content_to_channel = async (msg: Message, user: IUser) => {
   const [action_value, image_id, ...video_id_list] = user.action?.split(split_symbol);
 
@@ -68,6 +69,10 @@ export const send_series_content_to_channel = async (msg: Message, user: IUser) 
             await bot.sendMessage(user.userId, '🚫 WEB_API\'da hatolik yuz berdi❗️');
           }
         }
+      }
+
+      if(video_id_list.length > 20){
+        await new Promise(resolve => setTimeout(resolve, 3000));
       }
     }
 

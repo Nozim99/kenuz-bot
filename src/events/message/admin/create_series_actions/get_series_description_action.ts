@@ -42,6 +42,10 @@ export const get_series_description_action = async (msg: Message, user: IUser) =
         const new_movie_data: IMovie = await new_movie.save();
         movie_schema_id_list.push(new_movie_data._id.toString());
       }
+
+      if (video_id_list.length > 30) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
     }
 
     if (!movie_schema_id_list.length) {
