@@ -21,7 +21,7 @@ export const get_series_videos_action = async (msg: Message, user: IUser) => {
       return true;
     }
 
-    const video_number = (video_list.length || 0) + 1;
+    const video_number = (video_list?.length || 0) + 1;
     await User.findByIdAndUpdate(user._id, { action: user.action + split_symbol + video_id });
     await bot.sendMessage(user.userId, `✅ ${video_number}-qism Qo'shildi!`, {
       reply_markup: {
