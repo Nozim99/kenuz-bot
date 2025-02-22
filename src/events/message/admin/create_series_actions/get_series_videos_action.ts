@@ -6,7 +6,7 @@ import bot from '../../../../config/bot';
 
 
 export const get_series_videos_action = async (msg: Message, user: IUser) => {
-  const [action_value, start_series_num, image_id, video_list] = user.action?.split(split_symbol);
+  const [action_value, start_series_num, image_id, ...video_list] = user.action?.split(split_symbol);
 
   if (action_value === actions.get_series_videos && start_series_num && image_id && msg.text !== actions_text.write_description && msg.text !== actions_text.main_menu) {
     const video_id = msg.video?.file_id;
