@@ -51,7 +51,7 @@ export const check_member_middleware = async (msg: Message) => {
       return [result];
     });
 
-
+    const content_id = msg.text?.split(' ')[1];
     await bot.sendMessage(
       userId,
       '💐 Biz sizni kanalimizda intizorlik bilan kutamiz\n' +
@@ -61,10 +61,8 @@ export const check_member_middleware = async (msg: Message) => {
         reply_markup: {
           inline_keyboard: [
             ...unChannels,
-            [{
-              text: '🌏 Saytimizga tashrif buyuring',
-              url: WEBSITE_URL,
-            }],
+            [{ text: '🔁 Qayta urunish', url: `https://t.me/kenuzbot_bot?start=${content_id}` }],
+            [{ text: '🌏 Saytimizga tashrif buyuring', url: WEBSITE_URL }],
           ],
         },
       },

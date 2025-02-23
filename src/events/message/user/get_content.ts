@@ -18,15 +18,14 @@ export const get_content = async (msg: Message) => {
 
     if (await check_member_middleware(msg)) return true;
 
-
-    const movie: IMovie | null = await Movie.findById(content_id);
-
-    if (!movie) {
-      await bot.sendMessage(userId, '🚫 Topilmadi!', empty_menu);
-      return true;
-    }
-
     try {
+      const movie: IMovie | null = await Movie.findById(content_id);
+
+      if (!movie) {
+        await bot.sendMessage(userId, '🚫 Topilmadi!', empty_menu);
+        return true;
+      }
+
       await bot.copyMessage(userId, movie.fromChatId, movie.message_id, {
         reply_markup: {
           inline_keyboard: [
