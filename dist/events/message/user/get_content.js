@@ -19,12 +19,12 @@ const get_content = async (msg) => {
     if (bot_command === '/start' && content_id) {
         if (await (0, check_member_middleware_1.check_member_middleware)(msg))
             return true;
-        const movie = await Movie_1.default.findById(content_id);
-        if (!movie) {
-            await bot_1.default.sendMessage(userId, '🚫 Topilmadi!', empty_menu_1.empty_menu);
-            return true;
-        }
         try {
+            const movie = await Movie_1.default.findById(content_id);
+            if (!movie) {
+                await bot_1.default.sendMessage(userId, '🚫 Topilmadi!', empty_menu_1.empty_menu);
+                return true;
+            }
             await bot_1.default.copyMessage(userId, movie.fromChatId, movie.message_id, {
                 reply_markup: {
                     inline_keyboard: [

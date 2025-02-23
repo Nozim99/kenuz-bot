@@ -49,16 +49,15 @@ const check_member_middleware = async (msg) => {
             };
             return [result];
         });
+        const content_id = msg.text?.split(' ')[1];
         await bot_1.default.sendMessage(userId, '💐 Biz sizni kanalimizda intizorlik bilan kutamiz\n' +
             '🏃🏃‍♀️ Botdan foydalanish uchun quyidagi kanallarga obuna bo\'ling va qayta urunib ko\'ring 🔁\n' +
             'O\'zingiz izlagan narsangazni albatta topasiz 💯\n', {
             reply_markup: {
                 inline_keyboard: [
                     ...unChannels,
-                    [{
-                            text: '🌏 Saytimizga tashrif buyuring',
-                            url: env_1.WEBSITE_URL,
-                        }],
+                    [{ text: '🔁 Qayta urunish', url: `https://t.me/kenuzbot_bot?start=${content_id}` }],
+                    [{ text: '🌏 Saytimizga tashrif buyuring', url: env_1.WEBSITE_URL }],
                 ],
             },
         });
