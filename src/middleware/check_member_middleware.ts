@@ -15,16 +15,16 @@ const tg_channels_must_member = [
     chatId: -1002382338695,
     link: 'https://t.me/tarjima_animelar_123',
   },
-  {
-    name: 'Tarjima Filmlar',
-    chatId: -1002462536703,
-    link: 'https://t.me/tarjima_filmlar_12',
-  },
-  {
-    name: 'Tarjima Multfilmlar',
-    chatId: -1002364151215,
-    link: 'https://t.me/tarjima_multfilmlar_12',
-  },
+  // {
+  //   name: 'Tarjima Filmlar',
+  //   chatId: -1002462536703,
+  //   link: 'https://t.me/tarjima_filmlar_12',
+  // },
+  // {
+  //   name: 'Tarjima Multfilmlar',
+  //   chatId: -1002364151215,
+  //   link: 'https://t.me/tarjima_multfilmlar_12',
+  // },
 ] as const;
 
 
