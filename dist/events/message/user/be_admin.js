@@ -46,7 +46,7 @@ const be_admin = async (msg) => {
     if (msg.text === env_1.ADMIN_SECRET && userId) {
         const user = await User_1.default.findOne({ userId });
         if (user) {
-            await User_1.default.findByIdAndUpdate({ status: User_1.userStatus.ADMIN, action: actions_1.actions.main_menu });
+            await User_1.default.findByIdAndUpdate(user._id, { status: User_1.userStatus.ADMIN, action: actions_1.actions.main_menu });
         }
         else {
             const newUser = new User_1.default({

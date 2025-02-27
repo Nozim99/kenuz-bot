@@ -16,6 +16,8 @@ exports.actions = {
     choice_channel_for_series: 'choice_channel_for_series',
     login: 'login',
     login_password: 'login_password',
+    create_movie_simple: 'create_movie_simple',
+    save_video_for_simple_movie: 'save_video_for_simple_movie',
 };
 exports.actions_text = {
     main_menu: '🏠 Bosh sahifa',
@@ -23,4 +25,5 @@ exports.actions_text = {
     create_series: '🎞 Serial yaratish',
     write_description: '✍️ Description yozish',
     login: '👤 Kirish',
+    create_movie_simple: '⚡️ Oson Film yaratish 🎬',
 };

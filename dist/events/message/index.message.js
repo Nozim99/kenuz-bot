@@ -9,6 +9,7 @@ const user_1 = require("./user");
 bot_1.default.on('message', async (msg) => {
     if (msg.from?.is_bot)
         return;
+    // console.log(msg);
     try {
         if (await (0, user_1.user_message_actions)(msg))
             return true;
