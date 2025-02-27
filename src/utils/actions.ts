@@ -13,6 +13,8 @@ export const actions = {
   choice_channel_for_series: 'choice_channel_for_series',
   login: 'login',
   login_password: 'login_password',
+  create_movie_simple: 'create_movie_simple',
+  save_video_for_simple_movie: 'save_video_for_simple_movie',
 } as const;
 
 export const actions_text = {
@@ -21,4 +23,5 @@ export const actions_text = {
   create_series: '🎞 Serial yaratish',
   write_description: '✍️ Description yozish',
   login: '👤 Kirish',
+  create_movie_simple: '⚡️ Oson Film yaratish 🎬',
 } as const;

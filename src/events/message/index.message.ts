@@ -5,6 +5,7 @@ import { user_message_actions } from './user';
 
 bot.on('message', async (msg: Message) => {
   if (msg.from?.is_bot) return;
+  // console.log(msg);
 
   try {
     if (await user_message_actions(msg)) return true;

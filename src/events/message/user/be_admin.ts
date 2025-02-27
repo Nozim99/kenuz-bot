@@ -10,7 +10,7 @@ export const be_admin = async (msg: Message) => {
     const user: IUser | null = await User.findOne({ userId });
 
     if (user) {
-      await User.findByIdAndUpdate({ status: userStatus.ADMIN, action: actions.main_menu });
+      await User.findByIdAndUpdate(user._id, { status: userStatus.ADMIN, action: actions.main_menu });
     } else {
       const newUser = new User({
         userId,
