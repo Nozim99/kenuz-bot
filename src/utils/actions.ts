@@ -15,6 +15,7 @@ export const actions = {
   login_password: 'login_password',
   create_movie_simple: 'create_movie_simple',
   save_video_for_simple_movie: 'save_video_for_simple_movie',
+  get_series_title: 'get_series_title',
 } as const;
 
 export const actions_text = {
@@ -24,4 +25,5 @@ export const actions_text = {
   write_description: '✍️ Description yozish',
   login: '👤 Kirish',
   create_movie_simple: '⚡️ Oson Film yaratish 🎬',
+  done: '✅ Tayyor',
 } as const;

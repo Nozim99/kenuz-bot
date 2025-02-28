@@ -3,7 +3,7 @@ import User, { IUser } from '../../../../model/User';
 import { actions, actions_text } from '../../../../utils/actions';
 import bot from '../../../../config/bot';
 
-export const get_series_number_action = async (msg: Message, user: IUser) => {
+export const get_series_title_action = async (msg: Message, user: IUser) => {
   if (user.action === actions.get_series_number && msg.text !== actions_text.main_menu) {
     const series_num = Number(msg.text);
 
@@ -12,8 +12,8 @@ export const get_series_number_action = async (msg: Message, user: IUser) => {
       return true;
     }
 
-    await User.findByIdAndUpdate(user._id, { action: actions.get_series_image + '@(=_=)@' + series_num });
-    await bot.sendMessage(user.userId, "🖼 Rasm kiriting")
+    await User.findByIdAndUpdate(user._id, { action: actions.get_series_title + '@(=_=)@' + series_num });
+    await bot.sendMessage(user.userId, '✍️ Serialni nomini kiriting');
 
     return true;
   }
