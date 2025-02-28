@@ -37,13 +37,20 @@ const get_video_action = async (msg, user) => {
             : result_data.movie.category === constants_1.Categories.film
                 ? constants_1.tg_channels.film
                 : constants_1.tg_channels.cartoon;
+        const genres_capitalize = result_data.movie.genre?.map(item => {
+            if (!item)
+                return item;
+            const new_item = item.toLowerCase().split('');
+            new_item[0] = new_item[0]?.toUpperCase();
+            return new_item.join("");
+        });
         const movie_message = '🎬 Nomi: ' + result_data.movie.title + '\n' +
             '\n' +
             (result_data.movie.type === constants_1.MovieType.movie ? '🎥 Film' : '🎞 Serial') + '\n' +
             '🌍 Davlati: ' + result_data.movie.country + '\n' +
             '🇺🇿 Tili: ' + result_data.movie.language + '\n' +
             (result_data.movie.year ? '📆 Yili: ' + result_data.movie.year + '\n' : '') +
-            (result_data.movie.genre?.length ? '🧬 Janri: ' + result_data.movie.genre.join(', ') + '\n' : '') +
+            (genres_capitalize?.length ? '🧬 Janri: ' + genres_capitalize.join(', ') + '\n' : '') +
             (result_data.movie.age_limit ? '👥 Yosh chegarasi: ' + age_limit + '\n' : '') +
             '\n' + current_channel.username;
         // * Send video to Bot
