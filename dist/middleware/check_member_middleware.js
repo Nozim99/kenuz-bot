@@ -35,10 +35,15 @@ const check_member_middleware = async (msg) => {
         return;
     const unsubscribeChannels = [];
     for (const channel of tg_channels_must_member) {
-        const chatMember = await bot_1.default.getChatMember(channel.chatId, userId);
-        const isChatMember = ['creator', 'administrator', 'member'].includes(chatMember.status);
-        if (!isChatMember) {
-            unsubscribeChannels.push(channel);
+        try {
+            const chatMember = await bot_1.default.getChatMember(channel.chatId, userId);
+            const isChatMember = ['creator', 'administrator', 'member'].includes(chatMember.status);
+            if (!isChatMember) {
+                unsubscribeChannels.push(channel);
+            }
+        }
+        catch (error) {
+            console.error(error);
         }
     }
     if (unsubscribeChannels.length) {
