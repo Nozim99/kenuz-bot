@@ -6,9 +6,9 @@ import { get_number_emoji } from '../utils/get_number_emoji';
 
 const tg_channels_must_member = [
   {
-    name: 'ANIHUB',
-    chatId: -1002478699595,
-    link: 'https://t.me/Anihub_Rasmiy',
+    name: 'Anime guruhi',
+    chatId: -1002210362334,
+    link: 'https://t.me/anime_guruh1',
   },
   {
     name: 'Tarjima Animelar',
